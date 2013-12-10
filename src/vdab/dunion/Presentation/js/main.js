@@ -136,6 +136,7 @@ function getMessagesLocation() {
 
 function SubmitMessage() {
     console.log('submit');
+    hadklzqdlkqzkdlqzklmd
 }
 
 function loadAll() {
