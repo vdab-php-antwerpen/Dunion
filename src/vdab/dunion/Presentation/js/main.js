@@ -15,7 +15,7 @@ $(function() {
  //event listener registerlink
     $("#chatform").click(function(event) {
         event.preventDefault();
-        var text = val(this.msg);
+        var text = this.msg.value;
         SubmitMessage(text);
     });
 
@@ -143,7 +143,8 @@ function getMessagesLocation() {
 
 
 function SubmitMessage(text) {
-    console.log('submit');
+    console.log(text);
+    
 }
 function loadAll() {
 
