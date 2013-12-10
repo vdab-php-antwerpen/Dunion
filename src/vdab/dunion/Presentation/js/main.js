@@ -13,7 +13,7 @@ $(function() {
 
 
  //event listener registerlink
-    $("#chatform").click(function(event) {
+    $("#chatform").submit(function(event) {
         event.preventDefault();
         var text = this.msg.value;
         SubmitMessage(text);
