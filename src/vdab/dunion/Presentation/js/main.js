@@ -133,6 +133,11 @@ function getMessagesLocation() {
     });
 }
 
+
+function SubmitMessage() {
+    console.log('submit');
+}
+
 function loadAll() {
 
     //alert('ok');
