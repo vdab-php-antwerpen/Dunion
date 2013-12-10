@@ -11,7 +11,12 @@ $(function() {
 
     // if logged in, hide register and login form and fill up the location section
 
-
+ //event listener registerlink
+    $("#chatform").click(function(event) {
+        event.preventDefault();
+        var text = val(this.msg);
+        SubmitMessage(text);
+    });
     //event listener registerlink
     $("a#register").click(function(event) {
         event.preventDefault();
@@ -134,7 +139,7 @@ function getMessagesLocation() {
 }
 
 
-function SubmitMessage() {
+function SubmitMessage(text) {
     console.log('submit');
 }
 
