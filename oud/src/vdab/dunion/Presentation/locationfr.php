@@ -39,13 +39,10 @@
 
         <div class="header-container">
             <header class="wrapper clearfix">
-                <div class="logo">
-                    <h1 class="title">Dunion</h1>
-                    <h2 class="title">A PHP Scrum Project</h2>
-                </div>
-                <a class="logout" href="#" id="logout">Logout</a>
+                <h1 class="title">Dunion</h1><br>
+                <h2>A PHP Scrum Project</h2>
             </header>
-
+            <a href="#" id="logout">Logout</a>
         </div>
 
         <div class="main-container">
@@ -57,7 +54,7 @@
 
                     </div>
                 </article>
-
+                
                 <aside id="info">
                 </aside>
 
@@ -95,7 +92,7 @@
                             </div>
                             <div>
                                 <label for="email">Email:</label>
-                                <input id="email" type="text" name="email">
+                                <input id="email" type="email" name="email">
                             </div>
                             <div>
                                 <label for="password">Password:</label>
@@ -108,19 +105,6 @@
                         <a href="#" id="login">Goto Login Page</a>
                     </section>
                 </aside>
-                <div id="chatbox">
-                    <div id="reChat">                        
-                    </div>
-                    <form action="#" id="chatform">
-                        <div>
-                            <input placeholder="your message" id="msg" type="text" name="msg">
-                        </div>
-                        <div>
-                            <input class="submit" type="submit" name="submitchat" value="Send">
-                        </div>
-                    </form>
-
-                </div>
             </div> <!-- #main -->
         </div> <!-- #main-container -->
 

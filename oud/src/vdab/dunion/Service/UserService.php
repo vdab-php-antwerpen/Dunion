@@ -93,15 +93,8 @@ class UserService {
             if (empty($password) || is_null($password)) {
                 $oResponse->addException('IS_EMPTY_PASSWORD');
                 throw new ServiceException();
-            } 
-            if ($loginname != htmlspecialchars($loginname,ENT_QUOTES,'UTF-8')) {
-                $oResponse->addException('FORBIDDEN_CHARS_USERNAME');
-                throw new ServiceException();
-            } 
-             if ($password != htmlspecialchars($password,ENT_QUOTES,'UTF-8')) {
-                $oResponse->addException('FORBIDDEN_CHARS_PASSWORD');
-                throw new ServiceException();
-            } 
+            }
+
             $user = UserDAO::getByEmailOrUsername($loginname);
 
             if ($user == false) {
@@ -113,7 +106,6 @@ class UserService {
             $encrypted = self::passwordEncryption($password);
             if ($encrypted != $dbpassword) {
                 $oResponse->addException('PASSWORD_INCORRECT');
-                $user = false;
                 throw new ServiceException();
             }
             $id = intval($user->getId());
@@ -123,7 +115,6 @@ class UserService {
             $oResponse->addProperty('user', $output);
         } catch (ServiceException $se) {
 //niks doen
-           
         } catch (DataSourceException $dse) {
 //vangt exceptions op uit data-laag en zet deze om in een object van SimpleObjectResponse.class
             $oResponse->reset();
@@ -157,18 +148,6 @@ class UserService {
                 $oResponse->addException('IS_EMPTY_EMAIL');
                 throw new ServiceException();
             }
-             if ($username != htmlspecialchars($username,ENT_QUOTES,'UTF-8')) {
-                $oResponse->addException('FORBIDDEN_CHARS_USERNAME');
-                throw new ServiceException();
-            } 
-             if ($password != htmlspecialchars($password,ENT_QUOTES,'UTF-8')) {
-                $oResponse->addException('FORBIDDEN_CHARS_PASSWORD');
-                throw new ServiceException();
-            } 
-             if ($email != htmlspecialchars($email,ENT_QUOTES,'UTF-8')) {
-                $oResponse->addException('FORBIDDEN_CHARS_EMAIL');
-                throw new ServiceException();
-            } 
             if(!self::validatemail($email)){
                 $oResponse->addException("NOT_VALID_EMAIL");
                 throw new ServiceException();

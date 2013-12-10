@@ -6,9 +6,6 @@ $(function() {
     // check if already logged in
     checkIfLoggedIn();
 
-    getMessagesLocation();
-    setInterval(getMessagesLocation, 1000);
-
     // if logged in, hide register and login form and fill up the location section
 
 
@@ -82,56 +79,13 @@ $(function() {
         }
     });
 
-
-
-
-
-
+    
+    
+    
+    
+    
 }); // end document ready
 
-function getMessagesLocation() {
-    $.ajax({
-        url: 'json_getMessagesLocation.php',
-        dataType: 'json',
-        async: false,
-        data: {action: 'getMessages'},
-        success: function(data) {
-            // console.log(data);
-            if (data.exceptions) {
-                switch (data.exceptions[0]) {
-                    case 'ID_NOT_FOUND':
-                        message = 'id not found.';
-                        break;
-                    default:
-                        message = 'Error!';
-                }
-                alert(message);
-            } else {
-
-                if (data.lijstmessages.length !== 0) {
-
-                    var tableEl = $("<table>");
-
-                    $.each(data.lijstmessages, function(n, value) {
-                        var rijEl = $("<tr>");
-                        var kolomEl = $("<td>");
-                        kolomEl.html(value.user.username + ":");
-                        var kolomEl2 = $("<td>");
-                        kolomEl2.html(value.text);
-                        rijEl.append(kolomEl).append(kolomEl2);
-                        tableEl.append(rijEl);
-                    });
-
-                    $("div#reChat").html(tableEl);
-                } else {
-                    $("div#reChat").html("no messages");
-                }
-                //do something with data
-
-            }
-        }
-    });
-}
 
 function loadAll() {
 
@@ -155,25 +109,25 @@ function loadAll() {
             info += '</div>'
             $("aside#info").empty().append(info);
             //console.log(data.users);
-
+            
             if (data.users.length !== 0) {
-
-                var userlist = "<ul>";
-                $.each(data.users, function() {
-                    if (this.id != data.userdata.id) {
-                        userlist += "<li";
-                        if (this.logged_in == "1") {
-                            userlist += " class='loggedin'";
-                        }
-                        userlist += ">" + this.username + ": " + this.score + "</li>";
-                    }
-                });
-                userlist += "</ul>";
-                // console.log(userlist);
+            	
+	            var userlist = "<ul>";
+	            $.each(data.users, function() {
+	                if (this.id != data.userdata.id) {
+	                    userlist += "<li";
+	                    if (this.logged_in == "1") {
+	                        userlist += " class='loggedin'";
+	                    }
+	                    userlist += ">" + this.username + ": " + this.score + "</li>";
+	                }
+	            });
+	            userlist += "</ul>";
+	            console.log(userlist);
             } else {
-                userlist = "no players";
+            	userlist = "no players";
             }
-
+            
             // add userlist at current location
             $('div#gameinfo .users').empty().append(userlist);
             // add the user's username
@@ -205,32 +159,26 @@ function login(loginname, password) {
         async: false,
         data: {action: 'login', loginname: loginname, password: password},
         success: function(data) {
-            if (data.exceptions) {
-                switch (data.exceptions[0]) {
-                    case 'IS_EMPTY_USERNAME':
-                        message = 'Username can not be empty.';
-                        break;
-                    case 'IS_EMPTY_PASSWORD':
-                        message = 'Password can not be empty.';
-                        break;
-                    case 'USER_DOES_NOT_EXIST':
-                        message = 'This user does not exist.';
-                        break;
-                    case 'PASSWORD_INCORRECT':
-                        message = 'Username and/or password incorrect.';
-                        break;
-                    case 'FORBIDDEN_CHARS_USERNAME':
-                        message = 'Forbidden characters in the username!';
-                        break;
-                    case 'FORBIDDEN_CHARS_PASSWORD':
-                        message = 'Forbidden characters in the password!';
-                        break;
-                    default:
-                        message = 'Error!';
-                }
-                alert(message);
-            } else {
-                //do something with data
+        	if (data.exceptions) {
+        		switch (data.exceptions[0]) {
+  				case 'IS_EMPTY_USERNAME':
+      				message = 'Username can not be empty.';
+      				break;
+  				case 'IS_EMPTY_PASSWORD':
+      				message = 'Password can not be empty.';
+      				break;
+  				case 'USER_DOES_NOT_EXIST':
+      				message = 'This user does not exist.';
+      				break; 
+  				case 'PASSWORD_INCORRECT':
+      				message = 'Username and/or password incorrect.';
+      				break; 
+  				default:
+      				message = 'Error!';
+				}
+				alert(message);
+        	} else {
+        		//do something with data
                 $('aside#register').hide();
                 $('aside#login').hide();
                 $('a#logout').show();
@@ -238,9 +186,8 @@ function login(loginname, password) {
                 $('aside#info').show();
                 $('aside#dest').show();
                 $("aside#info").show();
-                $("div#chatbox").show();
                 loadAll();
-            }
+        	}
         }
     });
 }
@@ -266,7 +213,6 @@ function logout() {
     $("aside#info").hide();
     $('div.main-container').attr('style', 'background-image:none');
     $('div#location').hide();
-    $("div#chatbox").hide();
 
 }
 
@@ -277,36 +223,26 @@ function register(username, email, password) {
         async: false,
         data: {action: 'register', username: username, email: email, password: password},
         success: function(data) {
-            console.log(data.exceptions);
-            if (data.exceptions) {
-                switch (data.exceptions[0]) {
-                    case 'IS_EMPTY_USERNAME':
-                        message = 'Username can not be empty.';
-                        break;
-                    case 'IS_EMPTY_PASSWORD':
-                        message = 'Password can not be empty.';
-                        break;
-                    case 'IS_EMPTY_EMAIL':
-                        message = 'Emailaddress can not be empty.';
-                        break;
-                    case 'NOT_VALID_EMAIL':
-                        message = 'Please provide a valid email.';
-                        break;
-                    case 'FORBIDDEN_CHARS_USERNAME':
-                        message = 'Forbidden characters in the username!';
-                        break;
-                    case 'FORBIDDEN_CHARS_PASSWORD':
-                        message = 'Forbidden characters in the password!';
-                        break;
-                    case 'FORBIDDEN_CHARS_EMAIL':
-                        message = 'Forbidden characters in the email!';
-                        break;
-                    default:
-                        message = 'Error!';
-                }
-                alert(message);
-            } else {
-                //do something with data
+        	if (data.exceptions) {
+        		switch (data.exceptions[0]) {
+  				case 'IS_EMPTY_USERNAME':
+      				message = 'Username can not be empty.';
+      				break;
+  				case 'IS_EMPTY_PASSWORD':
+      				message = 'Password can not be empty.';
+      				break;
+  				case 'IS_EMPTY_EMAIL':
+      				message = 'Emailaddress can not be empty.';
+      				break; 
+  				case 'NOT_VALID_EMAIL':
+      				message = 'Please provide a valid email.';
+      				break; 
+  				default:
+      				message = 'Error!';
+				}
+				alert(message);
+        	} else {
+        		//do something with data
                 //console.log(data);
                 $('aside#register').hide();
                 $('aside#login').hide();
@@ -315,9 +251,8 @@ function register(username, email, password) {
                 $('div#gameinfo').show();
                 $('aside#dest').show();
                 $("aside#info").show();
-                $("div#chatbox").show();
                 loadAll();
-            }
+        	}
         }
     });
 }
@@ -353,7 +288,6 @@ function checkIfLoggedIn(loggedin) {
                 $('div#gameinfo').show();
                 $('aside#dest').show();
                 $("aside#info").show();
-                $("div#chatbox").show();
                 loadAll();
 
             } else {
@@ -365,7 +299,6 @@ function checkIfLoggedIn(loggedin) {
                 $('div#gameinfo').hide();
                 $('aside#dest').hide();
                 $("aside#info").hide();
-                $("div#chatbox").hide();
             }
         }
     });
