@@ -7,16 +7,18 @@ $(function() {
     checkIfLoggedIn();
 
     getMessagesLocation();
-    setInterval(getMessagesLocation, 1000);
+    //setInterval(getMessagesLocation, 1000);
 
     // if logged in, hide register and login form and fill up the location section
 
 
  //event listener registerlink
-    $("#chatform").click(function(event) {
+    $("#chatform").submit(function(event) {
         event.preventDefault();
-        var text = this.msg.value;
-        SubmitMessage(text);
+        var text = this.msg;
+        SubmitMessage(text.value);
+        text.value = "";
+        text.focus();
     });
 
     //event listener registerlink
@@ -143,8 +145,16 @@ function getMessagesLocation() {
 
 
 function SubmitMessage(text) {
-    console.log(text);
     
+        $.ajax({
+        url: 'json_createMessage.php',
+        dataType: 'json',
+        data: {action:"createMessage", message: text},
+        //async: false,
+        success: function(data) {
+            getMessagesLocation();
+        }
+    });
 }
 function loadAll() {
 
