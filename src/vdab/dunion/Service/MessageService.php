@@ -23,9 +23,10 @@ class MessageService {
             }
             $messages = MessageDAO::getByLocation($location);
 
-//            if ($messages == false) {
-//               $oResponse->addProperty('lijstmessages', "no messages");
-//            }else{
+            if ($messages == false) {
+              $oResponse->addException("NO_MSG");
+                throw new ServiceException();
+            }
             $lijstmessages = array();
             foreach ($messages as $message) {
                 $msg = $message->toStdClass();
@@ -33,7 +34,7 @@ class MessageService {
                 $lijstmessages[$message->getId()] = $msg;
             }
             $oResponse->addProperty('lijstmessages', $lijstmessages);
-         //   }
+            
         } catch (ServiceException $se) {
             
         } catch (DataSourceException $dse) {

@@ -6,13 +6,13 @@ $(function() {
     // check if already logged in
     checkIfLoggedIn();
 
-    getMessagesLocation();
+   // getMessagesLocation();
     //setInterval(getMessagesLocation, 1000);
 
     // if logged in, hide register and login form and fill up the location section
 
 
- //event listener registerlink
+    //event listener registerlink
     $("#chatform").submit(function(event) {
         event.preventDefault();
         var text = this.msg;
@@ -111,10 +111,13 @@ function getMessagesLocation() {
                     case 'ID_NOT_FOUND':
                         message = 'id not found.';
                         break;
+                         case 'NO_MSG':
+                        message = 'no messages!';
+                        break;
                     default:
                         message = 'Error!';
                 }
-                alert(message);
+                $("div#reChat").html(message);
             } else {
 
                 if (data.lijstmessages.length !== 0) {
@@ -130,10 +133,9 @@ function getMessagesLocation() {
                         rijEl.append(kolomEl).append(kolomEl2);
                         tableEl.append(rijEl);
                     });
-
-                    $("div#reChat").html(tableEl);
+                    $("div#reChat").empty().html(tableEl);
                 } else {
-                    $("div#reChat").html("no messages");
+                   
                 }
                 //do something with data
 
@@ -145,11 +147,11 @@ function getMessagesLocation() {
 
 
 function SubmitMessage(text) {
-    
-        $.ajax({
+
+    $.ajax({
         url: 'json_createMessage.php',
         dataType: 'json',
-        data: {action:"createMessage", message: text},
+        data: {action: "createMessage", message: text},
         //async: false,
         success: function(data) {
             getMessagesLocation();
@@ -177,6 +179,7 @@ function loadAll() {
             info += '<div class="users"></div>'
             info += '</div>'
             $("aside#info").empty().append(info);
+            getMessagesLocation();
             //console.log(data.users);
 
             if (data.users.length !== 0) {
@@ -352,6 +355,7 @@ function changeLocation(location_id) {
         async: false,
         data: {action: 'changelocation', location_id: location_id},
         success: function(data) {
+            
             //do something with data
             //console.log(data)
         }
