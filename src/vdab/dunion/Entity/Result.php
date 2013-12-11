@@ -19,7 +19,7 @@ class Result {
 
     public static function create($id, $description, $event, $outcome) {
         if (!isset(self::$idMap[$id])) {
-            self::$idMap[$id] = new Result($$id, $description, $event, $outcome);
+            self::$idMap[$id] = new Result($id, $description, $event, $outcome);
         }
         return self::$idMap[$id];
     }
@@ -58,6 +58,7 @@ class Result {
         $output->description = $this->getDescription();
         $output->event = $this->getEvent()->toStdClass();
         $output->outcome = $this->getOutcome();
+        
 
         return $output;
     }
