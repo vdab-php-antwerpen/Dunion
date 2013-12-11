@@ -1,11 +1,13 @@
 <?php
-use vdab\dunion\DAO\xxxxDAO;
+use vdab\dunion\Service\EventService;
 
 require 'preload.php';
 session_start();
 
+$user = unserialize($_SESSION['user']);
+$locationobj = $user->getLocation();
 
-$movies = CopyDAO::getById(4000);
-print("<pre>");
-var_dump($movies);
-exit(0);
+$event = EventService::getEvent($locationobj);
+
+
+echo json_encode($event);

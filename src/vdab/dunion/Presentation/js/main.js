@@ -5,7 +5,7 @@ $(function() {
 
     // check if already logged in
     checkIfLoggedIn();
-
+    getEvent();
    // getMessagesLocation();
     //setInterval(getMessagesLocation, 1000);
 
@@ -97,6 +97,19 @@ $(function() {
 
 
 }); // end document ready
+
+
+function getEvent(){
+        $.ajax({
+        url: 'json_getEventLocation.php',
+        dataType: 'json',
+        async: false,
+        data: {action: 'getEvent'},
+        success: function(data) {
+            console.log(data.event);
+        }
+        })
+};
 
 function getMessagesLocation() {
     $.ajax({
