@@ -33,7 +33,7 @@ display: block;
 
 }
 
-form div input {
+#chatbox form div input {
     margin-bottom: auto;
     margin-right: 0.25em;
     margin-left: 75%;
@@ -44,7 +44,7 @@ form div input {
     border-width: medium;
 }
 
-form input.submit {
+#chatbox form input.submit {
     float: right;
     width: 5%;
     margin-top: 0.25em;

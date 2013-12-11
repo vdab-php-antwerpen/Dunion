@@ -55,7 +55,8 @@
 
                 <article>
                     <div id="location">
-                        <div class="description"></div>
+                        <div class="description">     
+                        </div>
                         <div id="event"></div>
                     </div>
                 </article>
@@ -128,11 +129,11 @@
             </div> <!-- #main -->
         </div> <!-- #main-container -->
 
-        <div class="footer-container">
+<!--        <div class="footer-container">
             <footer class="wrapper">
                 <h3> &copy Dunion 2013</h3>
             </footer>
-        </div>
+        </div>-->
 
 
     </body>
