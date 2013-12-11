@@ -106,10 +106,30 @@ function getEvent(){
         async: false,
         data: {action: 'getEvent'},
         success: function(data) {
-            console.log(data.event);
+            if (data.exceptions) {
+                switch (data.exceptions[0]) {
+                    case 'ID_NOT_FOUND':
+                        message = 'id not found.';
+                        break;
+                         case 'NO_EVENT':
+                        message = 'no event!';
+                        break;
+                         case 'NO_RESULT':
+                        message = 'no result!';
+                        break;
+                    default:
+                        message = 'Error!';
+                }
+                $("div#event").html(message);
+        } else{
+            var alinea = $("<p>");
+            alinea.empty().html(data.event.event.description);
+             $("div#event").append(alinea);
         }
-        })
-};
+        }
+        });
+        
+}
 
 function getMessagesLocation() {
     $.ajax({

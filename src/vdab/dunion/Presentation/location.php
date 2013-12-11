@@ -56,7 +56,7 @@
                 <article>
                     <div id="location">
                         <div class="description"></div>
-
+                        <div id="event"></div>
                     </div>
                 </article>
 
