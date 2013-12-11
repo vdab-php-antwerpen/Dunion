@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Machine: 127.0.0.1
--- Genereertijd: 10 dec 2013 om 09:39
+-- Genereertijd: 11 dec 2013 om 11:02
 -- Serverversie: 5.5.27
 -- PHP-versie: 5.4.7
 
@@ -23,54 +23,16 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Tabelstructuur voor tabel `dunion_answers`
+-- Tabelstructuur voor tabel `dunion_events`
 --
 
-CREATE TABLE IF NOT EXISTS `dunion_answers` (
+CREATE TABLE IF NOT EXISTS `dunion_events` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `question_id` int(11) NOT NULL,
-  `answer` varchar(200) NOT NULL,
-  `correct` tinyint(1) NOT NULL,
+  `description` varchar(200) NOT NULL,
+  `location_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `question_id` (`question_id`),
-  KEY `question_id_2` (`question_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=31 ;
-
---
--- Gegevens worden uitgevoerd voor tabel `dunion_answers`
---
-
-INSERT INTO `dunion_answers` (`id`, `question_id`, `answer`, `correct`) VALUES
-(1, 1, 'Michael Jackson', 1),
-(2, 1, 'Neil Armstrong', 0),
-(3, 1, 'Louis Armstrong', 0),
-(4, 2, 'Karl Marx', 0),
-(5, 2, 'Groucho Marx', 1),
-(6, 2, 'Harpo Marx', 0),
-(7, 3, 'Lennon-McCartney', 0),
-(8, 3, 'Ingvar Kamprad', 0),
-(9, 3, 'Haruki Murakami', 1),
-(10, 4, 'DonCorleone', 0),
-(11, 4, 'James Brown', 1),
-(12, 4, 'Marlon Brando', 0),
-(13, 5, 'White', 0),
-(14, 5, 'Castle', 0),
-(15, 5, 'Morgan', 1),
-(16, 6, 'Apple', 0),
-(17, 6, 'Monthy Python', 1),
-(18, 6, 'Bjarne Stroustrup', 0),
-(19, 7, 'Eleven', 0),
-(20, 7, 'Infinite', 0),
-(21, 7, 'Seven', 1),
-(22, 8, 'Silvio Dante', 1),
-(23, 8, 'Silvio Commedia', 0),
-(24, 8, 'Silvio Divina', 0),
-(25, 9, 'Allak-Swivel', 0),
-(26, 9, 'Lillhojden', 0),
-(27, 9, 'Larsson', 1),
-(28, 10, 'Railway station at Toulouse, France', 0),
-(29, 10, 'The Walt Disney Concert Hall', 1),
-(30, 10, 'Bridge over the Schelde in Temse, Belgium', 0);
+  KEY `location_id` (`location_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -119,36 +81,32 @@ CREATE TABLE IF NOT EXISTS `dunion_messages` (
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`),
   KEY `location_id` (`location_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
+
+--
+-- Gegevens worden uitgevoerd voor tabel `dunion_messages`
+--
+
+INSERT INTO `dunion_messages` (`id`, `text`, `user_id`, `location_id`, `datetime`) VALUES
+(2, 'jhhjgjh', 108, 1, '2013-12-11 10:49:16'),
+(3, 'ghhhj', 108, 1, '2013-12-11 10:49:23'),
+(4, 'jhjkhh', 108, 1, '2013-12-11 10:49:33'),
+(5, 'hhh', 108, 2, '2013-12-11 10:49:42');
 
 -- --------------------------------------------------------
 
 --
--- Tabelstructuur voor tabel `dunion_questions`
+-- Tabelstructuur voor tabel `dunion_results`
 --
 
-CREATE TABLE IF NOT EXISTS `dunion_questions` (
+CREATE TABLE IF NOT EXISTS `dunion_results` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `question` text NOT NULL,
-  `points` int(4) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;
-
---
--- Gegevens worden uitgevoerd voor tabel `dunion_questions`
---
-
-INSERT INTO `dunion_questions` (`id`, `question`, `points`) VALUES
-(1, 'Whose 1988 autobiography is entitled ''Moonwalk''?', 50),
-(2, 'Who said ''Whatever it is- I''m against it!''?', 50),
-(3, 'Who wrote the novel ''Norwegian wood''?', 50),
-(4, 'Who was known as the Godfather of soul?', 50),
-(5, 'What''s the last name of the main character in the TV-series ''Dexter''?', 50),
-(6, 'Who created the machine that goes ''ping!''?', 50),
-(7, 'How many time can a regular piece of paper be folded?', 50),
-(8, 'What''s the charactername of Steven van Zandt in the Sopranos?', 50),
-(9, 'Who wrote the Millenium trilogy?', 50),
-(10, 'What wasn''t designed by the architect Gustave Eiffel?', 50);
+  `description` varchar(200) NOT NULL,
+  `event_id` int(11) NOT NULL,
+  `outcome` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `event_id` (`event_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -226,7 +184,7 @@ INSERT INTO `dunion_user` (`id`, `username`, `email`, `pasword`, `score`, `locat
 (105, 'thomas', 'thomas@thomas.com', '5f50a84c1fa3bcff146405017f36aec1a10a9e38', 0, 1, 0, '2013-12-09 09:51:46'),
 (106, 'jos', 'jos@jos.com', '7735a5fe86a8af42599ea328f9ed3ef64ccaffb0', 0, 1, 0, '2013-12-09 12:01:57'),
 (107, 'jos2', 'jos2@jos.com', '889182f70d3226df681c9e6ffb0a6fa6feaf0cb5', 0, 1, 0, '2013-10-04 09:50:11'),
-(108, 'ds', 'ds@ds.com', 'ba4868b3f277c8e387b55d9e3d0be7c045cdd89e', 0, 2, 0, '2013-12-09 12:46:11'),
+(108, 'ds', 'ds@ds.com', 'ba4868b3f277c8e387b55d9e3d0be7c045cdd89e', 0, 8, 1, '2013-12-11 09:49:57'),
 (109, 'dsdsqd', 'ddsqds@ds.com', '80b2f0caa594a3e173b7e356161f88b2dd02b9b9', 0, 1, 0, '2013-12-09 12:33:42');
 
 --
@@ -234,10 +192,10 @@ INSERT INTO `dunion_user` (`id`, `username`, `email`, `pasword`, `score`, `locat
 --
 
 --
--- Beperkingen voor tabel `dunion_answers`
+-- Beperkingen voor tabel `dunion_events`
 --
-ALTER TABLE `dunion_answers`
-  ADD CONSTRAINT `dunion_answers_ibfk_1` FOREIGN KEY (`question_id`) REFERENCES `dunion_questions` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `dunion_events`
+  ADD CONSTRAINT `dunion_events_ibfk_1` FOREIGN KEY (`location_id`) REFERENCES `dunion_location` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Beperkingen voor tabel `dunion_messages`
@@ -245,6 +203,12 @@ ALTER TABLE `dunion_answers`
 ALTER TABLE `dunion_messages`
   ADD CONSTRAINT `dunion_messages_ibfk_2` FOREIGN KEY (`location_id`) REFERENCES `dunion_location` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `dunion_messages_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `dunion_user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Beperkingen voor tabel `dunion_results`
+--
+ALTER TABLE `dunion_results`
+  ADD CONSTRAINT `dunion_results_ibfk_1` FOREIGN KEY (`event_id`) REFERENCES `dunion_events` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Beperkingen voor tabel `dunion_route`
