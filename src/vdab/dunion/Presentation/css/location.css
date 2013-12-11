@@ -1,0 +1,52 @@
+/**
+ * Version 1.02
+ * changelog:
+ * 1.00 generated location.css (PV)
+ */
+/* ========================================================================== */
+
+#chatbox {
+
+}
+
+#reChat {
+float: right;
+width: 15%;
+height: 6em;
+overflow-y: scroll;
+overflow: auto;
+clear: both;
+-webkit-box-shadow: 0 5px 10px #aaa;
+-moz-box-shadow: 0 5px 10px #aaa;
+box-shadow: 0 5px 10px #aaa;
+color: white;
+padding: 0px 5% 10px;
+background: #696969;
+opacity: 0.8;
+margin-bottom: 15px;
+display: block;
+}
+
+#chatform {
+    
+
+
+}
+
+form div input {
+    margin-bottom: auto;
+    margin-right: 0.25em;
+    margin-left: 75%;
+    float: left;
+    width: 24%;
+    border-style: inset;
+    border-color: whitesmoke;
+    border-width: medium;
+}
+
+form input.submit {
+    float: right;
+    width: 5%;
+    margin-top: 0.25em;
+    
+}

@@ -1,6 +1,7 @@
 /**
- * Version 1.02
+ * Version 1.03
  * changelog:
+ * 1.03 commented out form div input &	form input.submit   
  * 1.02 Sticky Footer (Edited version) added (PV)
  * 1.01 Colors changed (PV)
  * 1.00 generated via initializr.com/HTML5 Boilerplate styles (FV)
@@ -186,8 +187,8 @@ nav a:hover {
    ========================================================================== */
 
 	form div label {width:100%;}
-	form div input {margin-left:3%;width:97%; margin-bottom:10px;}
-	form input.submit {width:auto;margin-left:0;}
+	//form div input {margin-left:3%;width:97%; margin-bottom:10px;}
+	//form input.submit {width:auto;margin-left:0;}
 	div#location {width:100%;float:left;}
 	div#gameinfo {width:100%;float:left;}
     div.main-container{width: 100%;height: 670px;background: no-repeat; background-size:cover;}
@@ -471,4 +472,8 @@ nav a:hover {
     height: 100px;
     width: 100%;
   
+}
+
+.description {
+    background-color: ghostwhite;
 }

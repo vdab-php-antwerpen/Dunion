@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <!--
- * Version 1.05
+ * Version 1.06
  * changelog:
+ * 1.06 Added 'location.css'-link (PV)
  * 1.05 Removed unused code (PV)
  * 1.04 Blank <div id="location"> added to <article> (PV)
  * 1.03 Register added to <aside> (PV)
@@ -23,6 +24,7 @@
 
         <link rel="stylesheet" href="src/vdab/dunion/Presentation/css/normalize.min.css">
         <link rel="stylesheet" href="src/vdab/dunion/Presentation/css/main.css">
+        <link rel="stylesheet" href="src/vdab/dunion/Presentation/css/location.css">
 
         <script src="src/vdab/dunion/Presentation/js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
 
@@ -109,11 +111,13 @@
                     </section>
                 </aside>
                 <div id="chatbox">
-                    <div id="reChat">                        
+                    <div id="reChat">
+                        
                     </div>
+
                     <form action="#" id="chatform">
                         <div>
-                            <input placeholder="your message" id="msg" type="text" name="msg">
+                            <input class="message" placeholder="your message" id="msg" type="text" name="msg">
                         </div>
                         <div>
                             <input class="submit" type="submit" name="submitchat" value="Send">
