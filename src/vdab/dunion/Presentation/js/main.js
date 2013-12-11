@@ -127,13 +127,16 @@ function getEvent() {
                 $("div#event").append(alinea);
                 var tableEl = $("<table>");
                 var rijEl = $("<tr>");
-                var kolomEl1 =$("<td>");
-                $.each(data.event.results, function(result) {
-                    
-                    kolomEl1.append("<a data-outcome=" + result.outcome + ">").html(result.id);
-                     rijEl.append(kolomEl1);
+                $.each(data.event.results, function(n, result) {
+                    var info = '<td>'
+                    info += '<a href=# data-outcome=' + result.outcome + '>' + result.id
+                    info += '</a>'
+                    info += '</td>'
+                    rijEl.append(info);
                 })
-               
+                tableEl.html(rijEl);
+                $("div#event").append(tableEl);
+
 
             }
         }
