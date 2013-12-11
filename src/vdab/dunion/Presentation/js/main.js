@@ -5,7 +5,7 @@ $(function() {
 
     // check if already logged in
     checkIfLoggedIn();
-    getEvent();
+    //getEvent();
     // getMessagesLocation();
     //setInterval(getMessagesLocation, 1000);
 
@@ -124,7 +124,7 @@ function getEvent() {
             } else {
                 var alinea = $("<p>");
                 alinea.empty().html(data.event.event.description);
-                $("div#event").append(alinea);
+                $("div#event").empty().append(alinea);
                 var tableEl = $("<table>");
                 var rijEl = $("<tr>");
                 $.each(data.event.results, function(n, result) {
@@ -226,6 +226,7 @@ function loadAll() {
             info += '</div>'
             $("aside#info").empty().append(info);
             getMessagesLocation();
+            getEvent();
             //console.log(data.users);
 
             if (data.users.length !== 0) {
@@ -311,6 +312,7 @@ function login(loginname, password) {
                 $('aside#dest').show();
                 $("aside#info").show();
                 $("div#chatbox").show();
+                 
                 loadAll();
             }
         }
