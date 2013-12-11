@@ -22,23 +22,23 @@ $(function() {
     });
 
     //event listener registerlink
-    $("a#register").click(function(event) {
+    $("#registerbutton").click(function(event) {
         event.preventDefault();
         //alert('ok');
-        $('aside#login').hide();
-        $('aside#register').show();
+        $('#login').hide();
+        $('#register').show();
     });
 
     //event listener loginlink
-    $("a#login").click(function(event) {
+    $("#loginbutton").click(function(event) {
         event.preventDefault();
         //alert('ok');
-        $('aside#login').show();
-        $('aside#register').hide();
+        $('#login').show();
+        $('#register').hide();
     });
 
     //event listener logoutlink
-    $("a#logout").click(function(event) {
+    $("#logoutbutton").click(function(event) {
         event.preventDefault();
         //alert('ok');
         logout();
@@ -46,7 +46,7 @@ $(function() {
 
     //event listener change location
 
-    $('div.routes').on('click', 'a.route', function(event) {
+    $('div#routes').on('click', 'a#route', function(event) {
         event.preventDefault();
         //alert('ok');
         changeLocation(this.dataset.routeid);
@@ -163,7 +163,7 @@ function getMessagesLocation() {
                     default:
                         message = 'Error!';
                 }
-                $("div#reChat").html(message);
+                $("#reChat").html(message);
             } else {
 
                 if (data.lijstmessages.length !== 0) {
@@ -179,7 +179,7 @@ function getMessagesLocation() {
                         rijEl.append(kolomEl).append(kolomEl2);
                         tableEl.append(rijEl);
                     });
-                    $("div#reChat").empty().html(tableEl);
+                    $("#reChat").empty().html(tableEl);
                 } else {
 
                 }
@@ -218,13 +218,13 @@ function loadAll() {
             //add gameinfo
             var info = '<div id="gameinfo">'
             info += '<h3>Username:</h3>'
-            info += '<div class="user"></div>'
+            info += '<div id="user"></div>'
             info += '<h3>Score:</h3>'
-            info += '<div class="score"></div>'
+            info += '<div id="score"></div>'
             info += '<h3>players at this location:</h3>'
-            info += '<div class="users"></div>'
+            info += '<div id="users"></div>'
             info += '</div>'
-            $("aside#info").empty().append(info);
+            $("#info").empty().append(info);
             getMessagesLocation();
             getEvent();
             //console.log(data.users);
@@ -248,25 +248,25 @@ function loadAll() {
             }
 
             // add userlist at current location
-            $('div#gameinfo .users').empty().append(userlist);
+            $('#gameinfo #users').empty().append(userlist);
             // add the user's username
-            $('div#gameinfo .user').empty().append(data.userdata.username);
+            $('#gameinfo #user').empty().append(data.userdata.username);
 
             // add the user's score
-            $('div#gameinfo .score').empty().append(data.userdata.score);
+            $('#gameinfo #score').empty().append(data.userdata.score);
 
             // add description of current location
-            $('div#location .description').empty().append(data.userdata.location.description);
+            $('#location #description').empty().append(data.userdata.location.description);
             // add background image
             var imgUrl = "url(src/vdab/dunion/Presentation/img/" + data.userdata.location.id + ".jpg)";
-            $('div.main-container').css("background-image", imgUrl);
+            $('#main-container').css("background-image", imgUrl);
 
             //add target routes from current location
             var routes = "";
             $.each(data.userdata.location.routes, function() {
-                routes += "<a href='#' class='route' data-routeid='" + this.target + "'>" + this.target + "</a><br>";
+                routes += "<a href='#' id='route' data-routeid='" + this.target + "'>" + this.target + "</a><br>";
             });
-            $('div.routes').empty().append(routes);
+            $('#routes').empty().append(routes);
         }
     });
 }
@@ -304,15 +304,16 @@ function login(loginname, password) {
                 alert(message);
             } else {
                 //do something with data
-                $('aside#register').hide();
-                $('aside#login').hide();
-                $('a#logout').show();
-                $('div#location').show();
-                $('aside#info').show();
-                $('aside#dest').show();
-                $("aside#info").show();
-                $("div#chatbox").show();
-                 
+                $('#register').hide();
+                $('#login').hide();
+                $('#logoutbutton').show();
+                $('#location').show();
+                $('#info').show();
+                $('#dest').show();
+                $("#info").show();
+                $("#chatbox").show();
+                $("#event").show();
+
                 loadAll();
             }
         }
@@ -332,15 +333,15 @@ function logout() {
 //	      }
     });
 
-    $('aside#register').hide();
-    $('aside#login').show();
-    $('a#logout').hide();
-    $('aside#info').hide();
-    $('aside#dest').hide();
-    $("aside#info").hide();
-    $('div.main-container').attr('style', 'background-image:none');
-    $('div#location').hide();
-    $("div#chatbox").hide();
+    $('#register').hide();
+    $('#login').show();
+    $('#logoutbutton').hide();
+    $('#info').hide();
+    $('#dest').hide();
+    $('#event').hide();
+    // $('div.main-container').attr('style', 'background-image:none');
+    $('#location').hide();
+    $("#chatbox").hide();
 
 }
 
@@ -382,14 +383,15 @@ function register(username, email, password) {
             } else {
                 //do something with data
                 //console.log(data);
-                $('aside#register').hide();
-                $('aside#login').hide();
-                $('a#logout').show();
-                $('div#location').show();
-                $('div#gameinfo').show();
-                $('aside#dest').show();
-                $("aside#info").show();
-                $("div#chatbox").show();
+                $('#register').hide();
+                $('#login').hide();
+                $('#logoutbutton').show();
+                $('#location').show();
+                $('#gameinfo').show();
+                $('#dest').show();
+                $("#info").show();
+                $("#chatbox").show();
+                $("#event").show();
                 loadAll();
             }
         }
@@ -421,26 +423,26 @@ function checkIfLoggedIn(loggedin) {
             //do something with data
             //console.log(data);
             if (data.loggedin.value == 1) {
-                $('aside#register').hide();
-                $('aside#login').hide();
-                $('a#logout').show();
-                $('div#location').show();
-                $('div#gameinfo').show();
-                $('aside#dest').show();
-                $("aside#info").show();
-                $("div#chatbox").show();
+                $('#register').hide();
+                $('#login').hide();
+                $('#logoutbutton').show();
+                $('#location').show();
+                $('#gameinfo').show();
+                $('#dest').show();
+                $("#info").show();
+                $("#chatbox").show();
                 loadAll();
 
             } else {
                 // if not logged in, show login form
-                $('aside#register').hide();
-                $('aside#login').show();
-                $('a#logout').hide();
-                $('div#location').hide();
-                $('div#gameinfo').hide();
-                $('aside#dest').hide();
-                $("aside#info").hide();
-                $("div#chatbox").hide();
+                $('#register').hide();
+                $('#login').show();
+                $('#logoutbutton').hide();
+                $('#location').hide();
+                $('#gameinfo').hide();
+                $('#dest').hide();
+                $("#info").hide();
+                $("#chatbox").hide();
             }
         }
     });

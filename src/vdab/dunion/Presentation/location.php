@@ -23,7 +23,7 @@
         <meta name="viewport" content="width=device-width">
 
         <link rel="stylesheet" href="src/vdab/dunion/Presentation/css/normalize.min.css">
-        <link rel="stylesheet" href="src/vdab/dunion/Presentation/css/main.css">
+        <link rel="stylesheet" href="src/vdab/dunion/Presentation/css/bootstrap/css/bootstrap.min.css">
         <link rel="stylesheet" href="src/vdab/dunion/Presentation/css/location.css">
 
         <script src="src/vdab/dunion/Presentation/js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
@@ -39,101 +39,112 @@
             <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
         <![endif]-->
 
-        <div class="header-container">
-            <header class="wrapper clearfix">
-                <div class="logo">
-                    <h1 class="title">Dunion</h1>
-                    <h2 class="title">A PHP Scrum Project</h2>
-                </div>
-                <a class="logout" href="#" id="logout">Logout</a>
+        <div class="container">
+            <header>
+                <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+                    <!-- Brand and toggle get grouped for better mobile display -->
+                    <div class="navbar-header">
+                        <a class="navbar-brand" href="#">Dunion<small> a PHP Scrum Project</small></a>
+                    </div>
+
+                    <!-- Collect the nav links, forms, and other content for toggling -->
+                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+
+                        <ul class="nav navbar-nav navbar-right">
+                            <li><a href="#" id="logoutbutton">Logout</a></li>
+
+                        </ul>
+                    </div><!-- /.navbar-collapse -->
+                </nav>
             </header>
+
+            <div class="container" id="main-container">
+
+                <!--LOGIN-->
+                <div class="row" id="login">
+                    <div class="col-md-8" ><h2>Welkom</h2></div>
+                    <div class="col-md-4" >
+                        <h3>Login</h3>
+
+                        <form id="loginform">
+                            <div class="form-group">
+                                <label for="loginname">Username or Email:</label>
+                                <input type="text" name="loginname" class="form-control" id="loginname" placeholder="Enter username or email">
+                            </div>
+                            <div class="form-group">
+                                <label for="password">Password:</label>
+                                <input type="password" class="form-control" id="password" placeholder="Enter password">
+                            </div>
+                            <button type="submit" class="btn btn-default" id="submit">Login</button>
+                        </form>
+                        <a href="#" id="registerbutton">Go to Registration page</a>
+                    </div>
+                </div>
+
+                <!--REGISTREREN-->
+                <div class="row" id="register">
+                    <div class="col-md-8" ><h2>Welkom</h2></div>
+                    <div class="col-md-4" >
+                        <h3>Registreren</h3>
+
+                        <form id="registerform">
+                            <div class="form-group">
+                                <label for="username">Username:</label>
+                                <input type="text" name="username" class="form-control" id="username" placeholder="Enter username">
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email:</label>
+                                <input type="text" name="email" class="form-control" id="email" placeholder="Enter email">
+                            </div>
+                            <div class="form-group">
+                                <label for="password">Password:</label>
+                                <input type="password" class="form-control" id="password" placeholder="Enter password">
+                            </div>
+                            <button type="submit" class="btn btn-default" id="submitregister">Register</button>
+                        </form>
+                        <a href="#" id="loginbutton">Go to Login Page</a>
+                    </div>
+                </div>
+
+                <!--ALLES-->
+                <div class="row" id="location">
+                    <div class="col-md-8">
+                        <div id="description"></div>
+                        <div id="event"></div>
+
+                    </div>
+
+                    <div class="col-md-4" >
+                        <div id="info"></div>
+                        
+                        <div id="routes"></div>
+                        
+                        <div id="chatbox">
+                            <div id="reChat">
+
+                            </div>
+                            <form action="#" id="chatform">
+                                <div>
+                                    <input class="form-control" placeholder="Your message" id="msg" type="text" name="msg">
+                                </div>
+                                <div>
+                                    <button class="btn btn-default" type="submit" name="submitchat">Send</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
 
         </div>
 
-        <div class="main-container">
-            <div class="main wrapper clearfix">
-
-                <article>
-                    <div id="location">
-                        <div class="description">     
-                        </div>
-                        <div id="event"></div>
-                    </div>
-                </article>
-
-                <aside id="info">
-                </aside>
-
-                <aside id="dest">
-                    <h2>Next destination:</h2>
-                    <div class="routes"></div>
-                </aside>
-
-                <aside id="login">
-                    <section>
-                        <h3>Login</h3>
-                        <form action="#" id="loginform" method="POST">
-                            <div>
-                                <label for="logginname">Username or Email:</label>
-                                <input id="loginname" type="text" name="loginname">
-                            </div>
-                            <div>
-                                <label for="password">Password:</label>
-                                <input id="password" type="password" name="password">
-                            </div>
-                            <div id="lower">
-                                <input class="submit" type="submit" name="submit" value="Login">
-                            </div>
-                        </form>
-                        <a href="#" id="register">Not a Login yet? Register here</a>
-                    </section>
-                </aside>
-                <aside id="register">
-                    <section>
-                        <h3>Register</h3> 
-                        <form action="#" id="registerform" method="POST">
-                            <div>
-                                <label for="username">Username:</label>
-                                <input id="username" type="text" name="username">
-                            </div>
-                            <div>
-                                <label for="email">Email:</label>
-                                <input id="email" type="text" name="email">
-                            </div>
-                            <div>
-                                <label for="password">Password:</label>
-                                <input id="password" type="password" name="password">
-                            </div>
-                            <div id="lower">
-                                <input class="submit" type="submit" name="submitregister" value="Register">
-                            </div>
-                        </form>
-                        <a href="#" id="login">Goto Login Page</a>
-                    </section>
-                </aside>
-                <div id="chatbox">
-                    <div id="reChat">
-                        
-                    </div>
-
-                    <form action="#" id="chatform">
-                        <div>
-                            <input class="message" placeholder="your message" id="msg" type="text" name="msg">
-                        </div>
-                        <div>
-                            <input class="submit" type="submit" name="submitchat" value="Send">
-                        </div>
-                    </form>
-
-                </div>
-            </div> <!-- #main -->
-        </div> <!-- #main-container -->
-
-<!--        <div class="footer-container">
-            <footer class="wrapper">
-                <h3> &copy Dunion 2013</h3>
-            </footer>
-        </div>-->
+        <!--        <div class="footer-container">
+                    <footer class="wrapper">
+                        <h3> &copy Dunion 2013</h3>
+                    </footer>
+                </div>-->
 
 
     </body>
