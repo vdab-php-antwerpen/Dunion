@@ -221,7 +221,7 @@ function loadAll() {
             info += '<div id="user"></div>'
             info += '<h3>Score:</h3>'
             info += '<div id="score"></div>'
-            info += '<h3>players at this location:</h3>'
+            info += '<h3>Players at this location:</h3>'
             info += '<div id="users"></div>'
             info += '</div>'
             $("#info").empty().append(info);
@@ -259,14 +259,15 @@ function loadAll() {
             $('#location #description').empty().append(data.userdata.location.description);
             // add background image
             var imgUrl = "url(src/vdab/dunion/Presentation/img/" + data.userdata.location.id + ".jpg)";
-            $('#main-container').css("background-image", imgUrl);
+            $('body').css("background-image", imgUrl);
 
             //add target routes from current location
             var routes = "";
             $.each(data.userdata.location.routes, function() {
                 routes += "<a href='#' id='route' data-routeid='" + this.target + "'>" + this.target + "</a><br>";
             });
-            $('#routes').empty().append(routes);
+            var routeTitel = "<h3>Choose your destination:</h3>"
+            $('#routes').empty().append(routeTitel).append(routes);
         }
     });
 }
@@ -339,7 +340,7 @@ function logout() {
     $('#info').hide();
     $('#dest').hide();
     $('#event').hide();
-    // $('div.main-container').attr('style', 'background-image:none');
+     $('body').attr('style', 'background-image:none');
     $('#location').hide();
     $("#chatbox").hide();
 

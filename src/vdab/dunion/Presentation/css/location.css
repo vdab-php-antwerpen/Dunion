@@ -1,13 +1,34 @@
 /**
 TDB
- */
+*/
 /* ========================================================================== */
+
 
 body{
     padding-top: 70px;
+    background-size: cover;
+    background-repeat: no-repeat;
 }
 
 .row div{
-    background-color: #000;
+    background-color:rgba(0,0,0,0.2);
     color:#FFF;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
 }
+.row div a{
+    color:#FFF;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+
+.col-md-8 div{
+    padding:1.5em;
+    background: none;
+} 
+
+.col-md-4 div{
+    background: none;
+    padding:0.5em;
+} 

@@ -115,11 +115,13 @@
                     </div>
 
                     <div class="col-md-4" >
-                        <div id="info"></div>
-                        
-                        <div id="routes"></div>
-                        
+                        <div id="info"></div><hr>
+
+                        <div id="routes">
+                        </div><hr>
+
                         <div id="chatbox">
+                            <h3>Chatbox</h3>
                             <div id="reChat">
 
                             </div>
@@ -139,12 +141,6 @@
             </div>
 
         </div>
-
-        <!--        <div class="footer-container">
-                    <footer class="wrapper">
-                        <h3> &copy Dunion 2013</h3>
-                    </footer>
-                </div>-->
 
 
     </body>
