@@ -6,7 +6,7 @@ $(function() {
     // check if already logged in
     checkIfLoggedIn();
     getEvent();
-   // getMessagesLocation();
+    // getMessagesLocation();
     //setInterval(getMessagesLocation, 1000);
 
     // if logged in, hide register and login form and fill up the location section
@@ -99,8 +99,8 @@ $(function() {
 }); // end document ready
 
 
-function getEvent(){
-        $.ajax({
+function getEvent() {
+    $.ajax({
         url: 'json_getEventLocation.php',
         dataType: 'json',
         async: false,
@@ -111,24 +111,34 @@ function getEvent(){
                     case 'ID_NOT_FOUND':
                         message = 'id not found.';
                         break;
-                         case 'NO_EVENT':
+                    case 'NO_EVENT':
                         message = 'no event!';
                         break;
-                         case 'NO_RESULT':
+                    case 'NO_RESULT':
                         message = 'no result!';
                         break;
                     default:
                         message = 'Error!';
                 }
                 $("div#event").html(message);
-        } else{
-            var alinea = $("<p>");
-            alinea.empty().html(data.event.event.description);
-             $("div#event").append(alinea);
+            } else {
+                var alinea = $("<p>");
+                alinea.empty().html(data.event.event.description);
+                $("div#event").append(alinea);
+                var tableEl = $("<table>");
+                var rijEl = $("<tr>");
+                var kolomEl1 =$("<td>");
+                $.each(data.event.results, function(result) {
+                    
+                    kolomEl1.append("<a data-outcome=" + result.outcome + ">").html(result.id);
+                     rijEl.append(kolomEl1);
+                })
+               
+
+            }
         }
-        }
-        });
-        
+    });
+
 }
 
 function getMessagesLocation() {
@@ -144,7 +154,7 @@ function getMessagesLocation() {
                     case 'ID_NOT_FOUND':
                         message = 'id not found.';
                         break;
-                         case 'NO_MSG':
+                    case 'NO_MSG':
                         message = 'no messages!';
                         break;
                     default:
@@ -168,7 +178,7 @@ function getMessagesLocation() {
                     });
                     $("div#reChat").empty().html(tableEl);
                 } else {
-                   
+
                 }
                 //do something with data
 
@@ -388,7 +398,7 @@ function changeLocation(location_id) {
         async: false,
         data: {action: 'changelocation', location_id: location_id},
         success: function(data) {
-            
+
             //do something with data
             //console.log(data)
         }
