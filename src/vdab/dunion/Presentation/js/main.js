@@ -46,7 +46,7 @@ $(function() {
 
     //event listener change location
 
-    $('div#routes').on('click', 'a#route', function(event) {
+    $('div#routes').on('click', 'button#route', function(event) {
         event.preventDefault();
         //alert('ok');
         changeLocation(this.dataset.routeid);
@@ -129,20 +129,33 @@ function getEvent() {
                 var rijEl = $("<tr>");
                 $.each(data.event.results, function(n, result) {
                     var info = '<td>'
-                    info += '<a href=# data-outcome=' + result.outcome + '>' + result.id
+                    info += '<a href=# data-id=' + result.id + '>' + result.id
                     info += '</a>'
                     info += '</td>'
                     rijEl.append(info);
                 })
                 tableEl.html(rijEl);
                 $("div#event").append(tableEl);
-
+//event listener result
+                $("div#event a").click(function(event) {
+                    event.preventDefault();
+                    getResult(this.dataset.id , data.event.results[this.dataset.id]);
+                });
 
             }
         }
     });
 
 }
+
+function getResult(idResult, data) {
+    //console.log(idResult);
+    console.log(data);
+    if(data.id == 1){
+        $('#routes button').prop('disabled', false);
+    }
+}
+
 
 function getMessagesLocation() {
     $.ajax({
@@ -230,6 +243,7 @@ function loadAll() {
             //console.log(data.users);
 
             if (data.users.length !== 0) {
+                console.log(data.userdata.location.routes);
 
                 var userlist = "<ul>";
                 $.each(data.users, function() {
@@ -264,7 +278,8 @@ function loadAll() {
             //add target routes from current location
             var routes = "";
             $.each(data.userdata.location.routes, function() {
-                routes += "<a href='#' id='route' data-routeid='" + this.target + "'>" + this.target + "</a><br>";
+                //////disable van knoppen bij loadall  disabled='disabled'
+                routes += "<button class='btn btn-default' id='route'  data-routeid='" + this.target + "'>" + this.target + "</button><br>";
             });
             var routeTitel = "<h3>Choose your destination:</h3>"
             $('#routes').empty().append(routeTitel).append(routes);
@@ -340,7 +355,7 @@ function logout() {
     $('#info').hide();
     $('#dest').hide();
     $('#event').hide();
-     $('body').attr('style', 'background-image:none');
+    $('body').attr('style', 'background-image:none');
     $('#location').hide();
     $("#chatbox").hide();
 

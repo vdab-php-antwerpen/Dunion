@@ -39,7 +39,7 @@ class EventService {
             $eventStd->event = $event->toStdClass();
 
             foreach ($results as $result) {
-                $lijstresults[] = $result->toStdClass();
+                $lijstresults[$result->getId()] = $result->toStdClass();
             }
             
             $eventStd->results = $lijstresults;
