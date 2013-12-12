@@ -2,11 +2,11 @@
 
 namespace vdab\dunion\Service;
 
-use vdab\dunion\DAO\LocationDAO;
+use vdab\dunion\DAO\RouteDAO;
 use vdab\dunion\DAO\UserDAO;
-use vdab\dunion\Exception\ServiceException;
-use vdab\dunion\Exception\DataSourceException;
 use vdab\dunion\DTO\SimpleObjectResponse;
+use vdab\dunion\Exception\DataSourceException;
+use vdab\dunion\Exception\ServiceException;
 
 class ControlService {
 
@@ -21,10 +21,10 @@ class ControlService {
 
             // get all users by location
             $location_id = $user->getLocation()->getId();
-           
-            $userlist = UserDAO::getByLocation($location_id);
-         
-            
+
+            $userlist = UserDAO::getByLocationId($location_id);
+
+
             if (!empty($userlist)) {
                 $users = array();
                 foreach ($userlist as $userlistitem) {
@@ -39,7 +39,15 @@ class ControlService {
             $userid = intval($user->getId());
             $userdata = UserDAO::getById($userid);
             $userdata = $userdata->toStdClass();
+            
+            $routes = RouteDAO::getByCurrent($user->getLocation());
+            $lijstroutes = array();
+            foreach ($routes as $route) {
+                $lijstroutes[] = $route->toStdClass();
+            }
+
             $oResponse->addProperty('userdata', $userdata);
+            $oResponse->addProperty('routes', $lijstroutes);
 
 // 			// get locationdata
 // 			$location = LocationDAO::getById($location_id);

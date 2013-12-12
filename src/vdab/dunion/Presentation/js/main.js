@@ -243,7 +243,7 @@ function loadAll() {
             //console.log(data.users);
 
             if (data.users.length !== 0) {
-                console.log(data.userdata.location.routes);
+                
 
                 var userlist = "<ul>";
                 $.each(data.users, function() {
@@ -277,9 +277,9 @@ function loadAll() {
 
             //add target routes from current location
             var routes = "";
-            $.each(data.userdata.location.routes, function() {
+            $.each(data.routes, function() {
                 //////disable van knoppen bij loadall  disabled='disabled'
-                routes += "<button class='btn btn-default' id='route'  data-routeid='" + this.target + "'>" + this.target + "</button><br>";
+                routes += "<button class='btn btn-default' id='route'  data-routeid='" + this.target.id + "'>" + this.target.name + "</button><br>";
             });
             var routeTitel = "<h3>Choose your destination:</h3>"
             $('#routes').empty().append(routeTitel).append(routes);

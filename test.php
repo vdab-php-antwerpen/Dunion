@@ -1,13 +1,19 @@
 <?php
-use vdab\dunion\Service\EventService;
+
+use vdab\dunion\Service\ControlService;
 
 require 'preload.php';
 session_start();
 
 $user = unserialize($_SESSION['user']);
-$locationobj = $user->getLocation();
 
-$event = EventService::getEvent($locationobj);
+$alles = ControlService::getAllData($user);
 
 
-echo json_encode($event);
+echo json_encode($alles);
+
+//print_r('<pre>');
+//print_r($users);
+//print_r('</pre>');
+
+

@@ -52,8 +52,8 @@ class Route {
     public function toStdClass() {
         $output = new \stdClass;
         $output->id = $this->getId();
-        $output->current = $this->getCurrent();
-        $output->target = $this->getTarget();
+        $output->current = $this->getCurrent()->toStdClass();
+        $output->target = $this->getTarget()->toStdClass();
 
         return $output;
     }

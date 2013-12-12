@@ -21,9 +21,8 @@ if (isset($_GET["action"]) && $_GET["action"] == "changelocation" && (isset($_GE
   
     $userobject = unserialize($_SESSION["user"]);
     $location_id =($_GET["location_id"]);
-   
+
     $user = UserService::updateUserLocation($userobject, $location_id);
-   
     $_SESSION["user"] = serialize($user);
 //    print("<pre>");
 //    var_dump($user);

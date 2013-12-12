@@ -35,7 +35,8 @@ class UserDAO extends AbstractDAO {
             $resultset = $pstmt->fetchAll();
             if ($resultset != false) {
                 foreach ($resultset as $r) {
-                    $userlist[] = User::create(intval($r["id"]), $r["username"], $r["pasword"], $r["email"], $r["score"], $r["location_id"], $r["logged_in"], $r["last_updated"]);
+                    $location = LocationDAO::getById($r["location_id"]);
+                    $userlist[] = User::create(intval($r["id"]), $r["username"], $r["pasword"], $r["email"], $r["score"], $location, $r["logged_in"], $r["last_updated"]);
                 }
                 return $userlist;
             } else {
@@ -72,15 +73,15 @@ class UserDAO extends AbstractDAO {
             $pstmt->bindParam(":location", $location_start);
             $pstmt->bindParam(":logged_in", $logged_in);
             $pstmt->execute();
-			$last_updated = date('Y-m-d H:i:s');
+            $last_updated = date('Y-m-d H:i:s');
             $lastid = $dbh->lastInsertId();
             if ($lastid != null) {
-            	$location = LocationDAO::getById($location_start);
-            	return User::create($lastid, $username, $password, $email, $score, $location, $logged_in, $last_updated);
+                $location = LocationDAO::getById($location_start);
+
+                return User::create($lastid, $username, $password, $email, $score, $location, $logged_in, $last_updated);
             } else {
-            	return false;
+                return false;
             }
-            
         } catch (\PDOException $e) {
             throw new DataSourceException();
         }
@@ -105,10 +106,11 @@ class UserDAO extends AbstractDAO {
             $pstmt->execute();
             $r = $pstmt->fetch();
             if ($r != false) {
-            	$location_id = $r["location_id"];
-            	$location = LocationDAO::getById($location_id);
-            	
-                return User::create(intval($r["id"]), $r["username"], $r["pasword"], $r["email"], $r["score"], $location, $r["logged_in"], $r["last_updated"]);
+                $location_id = $r["location_id"];
+                $location = LocationDAO::getById($location_id);
+
+                $user = User::create(intval($r["id"]), $r["username"], $r["pasword"], $r["email"], $r["score"], $location, $r["logged_in"], $r["last_updated"]);
+                return $user;
             } else {
                 return false;
             }
@@ -136,12 +138,13 @@ class UserDAO extends AbstractDAO {
             $pstmt->execute();
             $r = $pstmt->fetch();
             if ($r != false) {
-                return User::create(intval($r["id"]), $r["username"], $r["pasword"], $r["email"], $r["score"], $r["location_id"], $r["logged_in"], $r["last_updated"]);
+                $location_id = $r["location_id"];
+                $location = LocationDAO::getById($location_id);
+
+                return User::create(intval($r["id"]), $r["username"], $r["pasword"], $r["email"], $r["score"], $location, $r["logged_in"], $r["last_updated"]);
             } else {
                 return false;
             }
-
-            return User::create($r["id"], $r["username"], $r["pasword"], $r["email"], $r["score"], $r["location_id"], $r["logged_in"], $r["last_updated"]);
         } catch (\PDOException $e) {
             throw new DataSourceException();
         }
@@ -153,29 +156,28 @@ class UserDAO extends AbstractDAO {
      * @return Array of all users(entity user) that are on specific location
      * @throws DataSourceException
      */
-    public static function getByLocation($location) {
+    public static function getByLocationId($locationid) {
         try {
-           // var_dump($location);
-            if (empty($location) || !is_int($location)) {
+            // var_dump($location);
+            if (empty($locationid) || !is_int($locationid)) {
                 throw new DataSourceException;
             }
             $sql = "select id, username, email, pasword,  score, location_id, logged_in, last_updated from dunion_user where location_id = :location ";
             $dbh = parent::getConnection();
             $pstmt = $dbh->prepare($sql);
-            $pstmt->bindParam(":location", $location);
+            $pstmt->bindParam(":location", $locationid);
             $pstmt->execute();
             $resultset = $pstmt->fetchAll();
-           // var_dump($resultset);
-          //  exit(0);
-           
-            
-            
+            // var_dump($resultset);
+            //  exit(0);
+
             if ($resultset != false) {
-            	$loc = LocationDAO::getById($location);
+                $location = LocationDAO::getById($locationid);
+                
                 foreach ($resultset as $r) {
-                	$userlist[] = User::create(intval($r["id"]), $r["username"], $r["pasword"], $r["email"], $r["score"], $loc, $r["logged_in"], $r["last_updated"]);
+                    $userlist[] = User::create(intval($r["id"]), $r["username"], $r["pasword"], $r["email"], $r["score"], $location, $r["logged_in"], $r["last_updated"]);
                 }
-               
+
                 return $userlist;
             } else {
                 return false;
@@ -199,9 +201,6 @@ class UserDAO extends AbstractDAO {
                 foreach ($results as $r) {
                     $userlist[] = User::create(intval($r["id"]), $r["username"], $r["pasword"], $r["email"], $r["score"], $r["location_id"], $r["logged_in"], $r["last_updated"]);
                 }
-
-
-
                 foreach ($userlist as $r) {
 
                     $sql2 = "update dunion_user set logged_in = 0 where id= :id";
@@ -259,7 +258,7 @@ class UserDAO extends AbstractDAO {
             //var_dump($pstmt);
             //exit(0);
             if ($r != false) {
-                
+
                 $location = LocationDAO::getById($r["location_id"]);
                 return User::create($r["id"], $r["username"], $r["pasword"], $r["email"], $r["score"], $location, $r["logged_in"], $r["last_updated"]);
             } else {
@@ -281,7 +280,6 @@ class UserDAO extends AbstractDAO {
             $pstmt->bindParam(":id", $id);
             $pstmt->execute();
             return true;
-            
         } catch (\PDOException $e) {
             throw new DataSourceException();
         }
@@ -292,12 +290,13 @@ class UserDAO extends AbstractDAO {
      * @return boolean
      * @throws DataSourceException
      */
+
     public static function updateUserLoggedOut($id) {
         try {
             if (empty($id) || !is_int($id)) {
                 throw new DataSourceException;
             }
-            $sql = "update dunion_user  set logged_in = 0 where id=:id" ;
+            $sql = "update dunion_user  set logged_in = 0 where id=:id";
             $dbh = parent::getConnection();
             $pstmt = $dbh->prepare($sql);
             $pstmt->bindParam(":id", $id);
@@ -307,30 +306,27 @@ class UserDAO extends AbstractDAO {
             throw new DataSourceException();
         }
     }
-    
-    
-    public static function updateUserLocation($user){
-        try{
-            if(empty($user)){
+
+    public static function updateUserLocation($user) {
+        try {
+            if (empty($user)) {
                 throw new DataSourceException;
             }
             $userid = $user->getId();
             $location_id = $user->getLocation()->getId();
-         
-            
+
+
             $sql = "update dunion_user set location_id = :locid where id = :userid";
             $dbh = parent::getConnection();
             $pstmt = $dbh->prepare($sql);
             $pstmt->bindParam(":locid", $location_id);
             $pstmt->bindParam("userid", $userid);
             $pstmt->execute();
-            
+
             return self::getById($userid);
-            
-    }
-    catch(\PDOException $e){
-        throw new DataSourceException();
-    }
+        } catch (\PDOException $e) {
+            throw new DataSourceException();
+        }
     }
 
 }
