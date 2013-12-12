@@ -213,7 +213,25 @@ function SubmitMessage(text) {
         data: {action: "createMessage", message: text},
         //async: false,
         success: function(data) {
+             if (data.exceptions) {
+                 console.log(data.exceptions);
+                switch (data.exceptions[0]) {
+                    case 'IS_EMPTY_TEXT':
+                        message = 'Please enter text.';
+                        break;
+                    case 'IS_EMPTY_USER':
+                        message = 'user is empty!';
+                        break;
+                         case 'FORBIDDEN_CHARS_USERNAME':
+                        message = 'Forbidden characters!';
+                        break;
+                    default:
+                        message = 'Error!';
+                }
+                $("#reChat").html(message);
+            } else {
             getMessagesLocation();
+        }
         }
     });
 }

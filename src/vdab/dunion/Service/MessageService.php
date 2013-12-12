@@ -48,13 +48,17 @@ class MessageService {
     public static function createMessage($user, $text) {
         try {
             $oResponse = new SimpleObjectResponse();
-            if (empty($text) || is_null($user)) {
+            if (empty($user) || is_null($user)) {
                 $oResponse->addException('IS_EMPTY_USER');
                 throw new ServiceException();
             }
 
-            if (empty($text) || is_null($text)) {
+            if (empty($text) || is_null($text) || (strlen(trim(preg_replace('/\xc2\xa0/',' ',$text))) == 0)) {
                 $oResponse->addException('IS_EMPTY_TEXT');
+                throw new ServiceException();
+            }
+            if ($text != htmlspecialchars($text, ENT_QUOTES, 'UTF-8')) {
+                $oResponse->addException('FORBIDDEN_CHARS_USERNAME');
                 throw new ServiceException();
             }
 

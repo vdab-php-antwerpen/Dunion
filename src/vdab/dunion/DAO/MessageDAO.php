@@ -62,7 +62,7 @@ class MessageDAO extends AbstractDAO {
             }
             $msglist = array();
             $location_id = $location->getId();
-            $sql = "select id, text, user_id, location_id, datetime from dunion_messages where location_id = :location_id order by datetime ASC limit 20";
+            $sql = "select id, text, user_id, location_id, datetime from dunion_messages where location_id = :location_id order by datetime DESC limit 10";
             $dbh = parent::getConnection();
             $pstmt = $dbh->prepare($sql);
             $pstmt->bindParam(":location_id", $location_id);
