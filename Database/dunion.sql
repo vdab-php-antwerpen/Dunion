@@ -1,13 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 3.5.2.2
+-- version 4.0.9
 -- http://www.phpmyadmin.net
 --
 -- Machine: 127.0.0.1
--- Genereertijd: 11 dec 2013 om 11:02
--- Serverversie: 5.5.27
--- PHP-versie: 5.4.7
+-- Genereertijd: 12 dec 2013 om 15:59
+-- Serverversie: 5.6.14
+-- PHP-versie: 5.5.6
 
-SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
 
@@ -32,7 +32,23 @@ CREATE TABLE IF NOT EXISTS `dunion_events` (
   `location_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `location_id` (`location_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=21 ;
+
+--
+-- Gegevens worden uitgevoerd voor tabel `dunion_events`
+--
+
+INSERT INTO `dunion_events` (`id`, `description`, `location_id`) VALUES
+(1, 'event van locatie 1', 1),
+(2, 'event van locatie 2', 2),
+(3, 'event van locatie 3', 3),
+(4, 'event van locatie 4', 4),
+(5, 'event van locatie 5', 5),
+(6, 'event van locatie 6', 6),
+(7, 'event van locatie 7', 7),
+(8, 'event van locatie 8', 8),
+(9, 'event van locatie 9', 9),
+(10, 'event van locatie 10', 10);
 
 -- --------------------------------------------------------
 
@@ -56,14 +72,14 @@ CREATE TABLE IF NOT EXISTS `dunion_location` (
 
 INSERT INTO `dunion_location` (`id`, `name`, `description`, `start`, `end`, `level`) VALUES
 (1, 'start', 'This is the starting location for new players', 1, 0, 1),
-(2, 'Location 2', '', 0, 0, 1),
-(3, 'Location 3', '', 0, 0, 1),
-(4, 'Location 4', '', 0, 0, 1),
-(5, 'Location 5', '', 0, 0, 1),
-(6, 'Location 6', '', 0, 0, 1),
-(7, 'Location 7', '', 0, 0, 1),
-(8, 'Location 8', '', 0, 0, 1),
-(9, 'Location 9', '', 0, 0, 1),
+(2, 'Location 2', 'this is location 2', 0, 0, 1),
+(3, 'Location 3', 'this is location 3', 0, 0, 1),
+(4, 'Location 4', 'this is location 4', 0, 0, 1),
+(5, 'Location 5', 'this is location 5', 0, 0, 1),
+(6, 'Location 6', 'this is location 6', 0, 0, 1),
+(7, 'Location 7', 'this is location 7', 0, 0, 1),
+(8, 'Location 8', 'this is location 8', 0, 0, 1),
+(9, 'Location 9', 'this is location 9', 0, 0, 1),
 (10, 'Location 10', 'This is where it all ends.\r\nEnd of level 1', 0, 1, 1);
 
 -- --------------------------------------------------------
@@ -81,7 +97,7 @@ CREATE TABLE IF NOT EXISTS `dunion_messages` (
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`),
   KEY `location_id` (`location_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=22 ;
 
 --
 -- Gegevens worden uitgevoerd voor tabel `dunion_messages`
@@ -106,7 +122,23 @@ CREATE TABLE IF NOT EXISTS `dunion_results` (
   `outcome` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `event_id` (`event_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;
+
+--
+-- Gegevens worden uitgevoerd voor tabel `dunion_results`
+--
+
+INSERT INTO `dunion_results` (`id`, `description`, `event_id`, `outcome`) VALUES
+(1, 'Het 1e result', 1, 1),
+(2, 'Het 2e result', 2, 1),
+(3, 'Het 3e result', 3, 1),
+(4, 'Het 4e result', 4, 1),
+(5, 'Het 5e result', 5, 1),
+(6, 'Het 6e result', 6, 1),
+(7, 'Het 7e result', 7, 1),
+(8, 'Het 8e result', 8, 1),
+(9, 'Het 9e result', 9, 1),
+(10, 'Het 10e result', 10, 1);
 
 -- --------------------------------------------------------
 
@@ -174,7 +206,7 @@ CREATE TABLE IF NOT EXISTS `dunion_user` (
   UNIQUE KEY `username` (`username`),
   UNIQUE KEY `email` (`email`),
   KEY `location_id` (`location_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=110 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=111 ;
 
 --
 -- Gegevens worden uitgevoerd voor tabel `dunion_user`
@@ -184,7 +216,7 @@ INSERT INTO `dunion_user` (`id`, `username`, `email`, `pasword`, `score`, `locat
 (105, 'thomas', 'thomas@thomas.com', '5f50a84c1fa3bcff146405017f36aec1a10a9e38', 0, 1, 0, '2013-12-09 09:51:46'),
 (106, 'jos', 'jos@jos.com', '7735a5fe86a8af42599ea328f9ed3ef64ccaffb0', 0, 1, 0, '2013-12-09 12:01:57'),
 (107, 'jos2', 'jos2@jos.com', '889182f70d3226df681c9e6ffb0a6fa6feaf0cb5', 0, 1, 0, '2013-10-04 09:50:11'),
-(108, 'ds', 'ds@ds.com', 'ba4868b3f277c8e387b55d9e3d0be7c045cdd89e', 0, 8, 1, '2013-12-11 09:49:57'),
+(108, 'ds', 'ds@ds.com', 'ba4868b3f277c8e387b55d9e3d0be7c045cdd89e', 0, 1, 0, '2013-12-12 12:29:42'),
 (109, 'dsdsqd', 'ddsqds@ds.com', '80b2f0caa594a3e173b7e356161f88b2dd02b9b9', 0, 1, 0, '2013-12-09 12:33:42');
 
 --
