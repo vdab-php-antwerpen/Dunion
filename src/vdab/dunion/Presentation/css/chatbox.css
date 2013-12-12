@@ -15,14 +15,14 @@
     opacity: 0.8;
     margin-bottom: 15px;
     display: block;
+    text-shadow: 1px 1px 1px #000;
 }
 
 #msg {
     -webkit-box-shadow: 0 5px 10px #aaa;
     -moz-box-shadow: 0 5px 10px #aaa;
     box-shadow: 0 5px 10px #aaa;
-//    color: white;
-}
+    }
 
 
 #sbmt {
