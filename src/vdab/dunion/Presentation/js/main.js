@@ -7,7 +7,7 @@ $(function() {
     checkIfLoggedIn();
     //getEvent();
     // getMessagesLocation();
-    //setInterval(getMessagesLocation, 1000);
+//    setInterval(getMessagesLocation, 1000);
 
     // if logged in, hide register and login form and fill up the location section
 
@@ -139,7 +139,7 @@ function getEvent() {
 //event listener result
                 $("div#event a").click(function(event) {
                     event.preventDefault();
-                    getResult(this.dataset.id , data.event.results[this.dataset.id]);
+                    getResult(data.event.results[this.dataset.id]);
                 });
 
             }
@@ -148,12 +148,23 @@ function getEvent() {
 
 }
 
-function getResult(idResult, data) {
+function getResult(data) {
     //console.log(idResult);
-    console.log(data);
-    if(data.id == 1){
+    console.log(data.description);
+
+    if (data.outcome == 1) {
+        changeLocation(2);
+        loadAll();
+    } else
+    if (data.outcome == 2) {
+        changeLocation(1);
+        loadAll();
+    } else
+    if (data.outcome == 3) {
         $('#routes button').prop('disabled', false);
     }
+    alert(data.description);
+
 }
 
 
@@ -213,8 +224,8 @@ function SubmitMessage(text) {
         data: {action: "createMessage", message: text},
         //async: false,
         success: function(data) {
-             if (data.exceptions) {
-                 console.log(data.exceptions);
+            if (data.exceptions) {
+                console.log(data.exceptions);
                 switch (data.exceptions[0]) {
                     case 'IS_EMPTY_TEXT':
                         message = 'Please enter text.';
@@ -222,7 +233,7 @@ function SubmitMessage(text) {
                     case 'IS_EMPTY_USER':
                         message = 'user is empty!';
                         break;
-                         case 'FORBIDDEN_CHARS_USERNAME':
+                    case 'FORBIDDEN_CHARS_USERNAME':
                         message = 'Forbidden characters!';
                         break;
                     default:
@@ -230,8 +241,11 @@ function SubmitMessage(text) {
                 }
                 $("#reChat").html(message);
             } else {
-            getMessagesLocation();
-        }
+                getMessagesLocation();
+//                var elem = $('#reChat');
+//                elem.scrollTop = elem.scrollHeight;
+                $('#reChat').scrollTop($('#reChat')[0].scrollHeight);
+            }
         }
     });
 }
@@ -261,7 +275,7 @@ function loadAll() {
             //console.log(data.users);
 
             if (data.users.length !== 0) {
-                
+
 
                 var userlist = "<ul>";
                 $.each(data.users, function() {
@@ -297,14 +311,14 @@ function loadAll() {
             var routes = "";
             $.each(data.routes, function() {
                 //////disable van knoppen bij loadall  disabled='disabled'
-                routes += "<button class='btn btn-default' id='route'  data-routeid='" + this.target.id + "'>" + this.target.name + "</button><br>";
+                routes += "<button class='btn btn-default' id='route' disabled='disabled' data-routeid='" + this.target.id + "'>" + this.target.name + "</button><br>";
             });
             var routeTitel = "<h3>Choose your destination:</h3>"
             $('#routes').empty().append(routeTitel).append(routes);
+
         }
     });
 }
-
 function login(loginname, password) {
     $.ajax({
         url: 'json_login.php',
@@ -360,10 +374,10 @@ function logout() {
         dataType: 'json',
         async: false,
         data: {action: 'logout'},
-//	      success: function (data) {
-//	      		//do something with data
-//	    	  //console.log(data);
-//	    	
+        //	      success: function (data) {
+        //	      		//do something with data
+        //	    	  //console.log(data);
+        //	    	
 //	      }
     });
 
