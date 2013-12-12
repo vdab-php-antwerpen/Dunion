@@ -25,6 +25,7 @@
         <link rel="stylesheet" href="src/vdab/dunion/Presentation/css/normalize.min.css">
         <link rel="stylesheet" href="src/vdab/dunion/Presentation/css/bootstrap/css/bootstrap.min.css">
         <link rel="stylesheet" href="src/vdab/dunion/Presentation/css/location.css">
+        <link rel="stylesheet" href="src/vdab/dunion/Presentation/css/chatbox.css">
 
         <script src="src/vdab/dunion/Presentation/js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
 
@@ -130,7 +131,7 @@
                                     <input class="form-control" placeholder="Your message" id="msg" type="text" name="msg">
                                 </div>
                                 <div>
-                                    <button class="btn btn-default" type="submit" name="submitchat">Send</button>
+                                    <button class="btn btn-default" id="sbmt" type="submit" name="submitchat">Send</button>
                                 </div>
                             </form>
                         </div>

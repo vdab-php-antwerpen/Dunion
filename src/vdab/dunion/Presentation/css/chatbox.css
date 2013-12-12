@@ -1,0 +1,32 @@
+#reChat {
+    /*float: right;*/
+    width: 95%;
+    height: 6em;
+    overflow-y: scroll;
+    overflow: auto;
+    clear: both;
+    -webkit-box-shadow: 0 5px 10px #aaa;
+    -moz-box-shadow: 0 5px 10px #aaa;
+    box-shadow: 0 5px 10px #aaa;
+    color: white;
+    margin-left: 2.50%;
+    padding: 0px 0 10px;
+    background: transparent;
+    opacity: 0.8;
+    margin-bottom: 15px;
+    display: block;
+}
+
+#msg {
+    -webkit-box-shadow: 0 5px 10px #aaa;
+    -moz-box-shadow: 0 5px 10px #aaa;
+    box-shadow: 0 5px 10px #aaa;
+//    color: white;
+}
+
+
+#sbmt {
+   -webkit-box-shadow: inset 0 5px 10px #aaa;
+    -moz-box-shadow: inset 0 5px 10px #aaa;
+    box-shadow: inset 0 5px 10px #aaa;
+ }
