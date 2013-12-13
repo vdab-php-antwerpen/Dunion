@@ -131,15 +131,15 @@ function getEvent() {
                 var rijEl = $("<tr>");
                 $.each(data.event.results, function(n, result) {
                     var info = '<td>'
-                    info += '<a href=# data-id=' + result.id + '>' + result.id
-                    info += '</a>'
+                    info += '<button class="btn btn-default" data-id=' + result.id + '>' + result.id
+                    info += '</button>'
                     info += '</td>'
                     rijEl.append(info);
                 })
                 tableEl.html(rijEl);
                 $("div#event").append(tableEl);
 //event listener result
-                $("div#event a").click(function(event) {
+                $("div#event button").click(function(event) {
                     event.preventDefault();
                     getResult(data.event.results[this.dataset.id]);
                 });
