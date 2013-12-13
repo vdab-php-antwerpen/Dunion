@@ -1,7 +1,7 @@
 #reChat {
     /*float: right;*/
     width: 95%;
-    height: 6em;
+    height: 10em;
     overflow-y: scroll;
     overflow: auto;
     clear: both;

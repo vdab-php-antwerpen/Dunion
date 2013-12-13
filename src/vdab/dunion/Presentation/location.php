@@ -22,6 +22,7 @@
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width">
 
+        <link rel="shortcut icon" href="src/vdab/dunion/Presentation/img/favicon.ico">
         <link rel="stylesheet" href="src/vdab/dunion/Presentation/css/normalize.min.css">
         <link rel="stylesheet" href="src/vdab/dunion/Presentation/css/bootstrap/css/bootstrap.min.css">
         <link rel="stylesheet" href="src/vdab/dunion/Presentation/css/location.css">
