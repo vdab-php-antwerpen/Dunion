@@ -7,6 +7,8 @@ $(function() {
     checkIfLoggedIn();
     //getEvent();
     // getMessagesLocation();
+
+
     setInterval(getMessagesLocation, 1000);
 
     // if logged in, hide register and login form and fill up the location section
@@ -204,6 +206,7 @@ function getMessagesLocation() {
                         tableEl.append(rijEl);
                     });
                     $("#reChat").empty().html(tableEl);
+
                 } else {
 
                 }
@@ -212,6 +215,9 @@ function getMessagesLocation() {
             }
         }
     });
+
+
+
 }
 
 
@@ -311,7 +317,7 @@ function loadAll() {
             var routes = "";
             $.each(data.routes, function() {
                 //////disable van knoppen bij loadall  disabled='disabled'
-                routes += "<button class='btn btn-default' id='route' data-routeid='" + this.target.id + "'>" + this.target.name + "</button><br>";
+                routes += "<button class='btn btn-default' id='route' disabled='disabled' data-routeid='" + this.target.id + "'>" + this.target.name + "</button><br>";
             });
             var routeTitel = "<h3>Choose your destination:</h3>"
             $('#routes').empty().append(routeTitel).append(routes);
@@ -498,3 +504,10 @@ function checkIfLoggedIn(loggedin) {
 
 
 
+function refreshPartial() {
+    $.ajax({
+        url: "/communities/setinterval_part?page=",
+        type: "GET",
+        dataType: "script",
+    });
+}
