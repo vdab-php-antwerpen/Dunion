@@ -7,7 +7,7 @@ $(function() {
     checkIfLoggedIn();
     //getEvent();
     // getMessagesLocation();
-//    setInterval(getMessagesLocation, 1000);
+    setInterval(getMessagesLocation, 1000);
 
     // if logged in, hide register and login form and fill up the location section
 

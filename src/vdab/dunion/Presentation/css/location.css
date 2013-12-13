@@ -12,6 +12,14 @@ body{
 
 }
 
+#users .loggedin{
+    color:#FFF;
+}
+
+#users{
+    color:#cccccc;
+}
+
 .row div{
     background-color:rgba(0,0,0,0.2);
     color:#FFF;
