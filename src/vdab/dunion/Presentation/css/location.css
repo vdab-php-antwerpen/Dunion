@@ -5,9 +5,11 @@ TDB
 
 
 body{
+    background-image: url(../img/default.jpg);
     padding-top: 70px;
     background-size: cover;
     background-repeat: no-repeat;
+
 }
 
 .row div{

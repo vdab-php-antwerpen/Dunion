@@ -387,7 +387,7 @@ function logout() {
     $('#info').hide();
     $('#dest').hide();
     $('#event').hide();
-    $('body').attr('style', 'background-image:none');
+    $('body').attr('style', 'background-image:../img/default.jpg');
     $('#location').hide();
     $("#chatbox").hide();
 
