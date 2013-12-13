@@ -42,3 +42,18 @@ body{
     background: none;
     padding:0.5em;
 } 
+
+
+#reChat {
+
+    width: 95%;
+    height: 10em;
+    overflow-y: scroll;
+    overflow: auto;
+    clear: both;
+    color:#000;
+    background-color:#FFF;
+    margin-left: 2.50%;
+    padding: 0px 0 10px;
+    margin-bottom: 15px;
+}
