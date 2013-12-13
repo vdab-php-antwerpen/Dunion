@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Machine: 127.0.0.1
--- Genereertijd: 12 dec 2013 om 15:59
+-- Genereertijd: 13 dec 2013 om 08:54
 -- Serverversie: 5.6.14
 -- PHP-versie: 5.5.6
 
@@ -32,7 +32,7 @@ CREATE TABLE IF NOT EXISTS `dunion_events` (
   `location_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `location_id` (`location_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=21 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;
 
 --
 -- Gegevens worden uitgevoerd voor tabel `dunion_events`
@@ -97,7 +97,7 @@ CREATE TABLE IF NOT EXISTS `dunion_messages` (
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`),
   KEY `location_id` (`location_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=22 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
 
 --
 -- Gegevens worden uitgevoerd voor tabel `dunion_messages`
@@ -122,7 +122,7 @@ CREATE TABLE IF NOT EXISTS `dunion_results` (
   `outcome` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `event_id` (`event_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=68 ;
 
 --
 -- Gegevens worden uitgevoerd voor tabel `dunion_results`
@@ -130,15 +130,35 @@ CREATE TABLE IF NOT EXISTS `dunion_results` (
 
 INSERT INTO `dunion_results` (`id`, `description`, `event_id`, `outcome`) VALUES
 (1, 'Het 1e result', 1, 1),
-(2, 'Het 2e result', 2, 1),
-(3, 'Het 3e result', 3, 1),
-(4, 'Het 4e result', 4, 1),
-(5, 'Het 5e result', 5, 1),
-(6, 'Het 6e result', 6, 1),
-(7, 'Het 7e result', 7, 1),
-(8, 'Het 8e result', 8, 1),
-(9, 'Het 9e result', 9, 1),
-(10, 'Het 10e result', 10, 1);
+(2, 'Het 2e result', 1, 2),
+(3, 'Het 3e result', 1, 3),
+(4, 'Het 1e result', 2, 1),
+(5, 'Het 2e result', 2, 2),
+(6, 'Het 3e result', 2, 3),
+(7, 'Het 1e result', 3, 1),
+(8, 'Het 2e result', 3, 2),
+(9, 'Het 3e result', 3, 3),
+(47, 'Het 1e result', 4, 1),
+(48, 'Het 2e result', 4, 2),
+(49, 'Het 3e result', 4, 3),
+(50, 'Het 1e result', 5, 1),
+(51, 'Het 2e result', 5, 2),
+(52, 'Het 3e result', 5, 3),
+(53, 'Het 1e result', 6, 1),
+(54, 'Het 2e result', 6, 2),
+(55, 'Het 3e result', 6, 3),
+(56, 'Het 1e result', 7, 1),
+(57, 'Het 2e result', 7, 2),
+(58, 'Het 3e result', 7, 3),
+(59, 'Het 1e result', 8, 1),
+(60, 'Het 2e result', 8, 2),
+(61, 'Het 3e result', 8, 3),
+(62, 'Het 1e result', 9, 1),
+(63, 'Het 2e result', 9, 2),
+(64, 'Het 3e result', 9, 3),
+(65, 'Het 1e result', 10, 1),
+(66, 'Het 2e result', 10, 2),
+(67, 'Het 3e result', 10, 3);
 
 -- --------------------------------------------------------
 
@@ -206,7 +226,7 @@ CREATE TABLE IF NOT EXISTS `dunion_user` (
   UNIQUE KEY `username` (`username`),
   UNIQUE KEY `email` (`email`),
   KEY `location_id` (`location_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=111 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=110 ;
 
 --
 -- Gegevens worden uitgevoerd voor tabel `dunion_user`
@@ -233,8 +253,8 @@ ALTER TABLE `dunion_events`
 -- Beperkingen voor tabel `dunion_messages`
 --
 ALTER TABLE `dunion_messages`
-  ADD CONSTRAINT `dunion_messages_ibfk_2` FOREIGN KEY (`location_id`) REFERENCES `dunion_location` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `dunion_messages_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `dunion_user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `dunion_messages_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `dunion_user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `dunion_messages_ibfk_2` FOREIGN KEY (`location_id`) REFERENCES `dunion_location` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Beperkingen voor tabel `dunion_results`
