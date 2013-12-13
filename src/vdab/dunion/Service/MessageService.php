@@ -57,7 +57,7 @@ class MessageService {
                 $oResponse->addException('IS_EMPTY_TEXT');
                 throw new ServiceException();
             }
-            if ($text != htmlspecialchars($text, ENT_QUOTES, 'UTF-8')) {
+            if ($text != strip_tags($text)) {
                 $oResponse->addException('FORBIDDEN_CHARS_USERNAME');
                 throw new ServiceException();
             }
