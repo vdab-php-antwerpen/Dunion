@@ -26,7 +26,7 @@
         <link rel="stylesheet" href="src/vdab/dunion/Presentation/css/normalize.min.css">
         <link rel="stylesheet" href="src/vdab/dunion/Presentation/css/bootstrap/css/bootstrap.min.css">
         <link rel="stylesheet" href="src/vdab/dunion/Presentation/css/location.css">
-        <link rel="stylesheet" href="src/vdab/dunion/Presentation/css/chatbox.css">
+
 
         <script src="src/vdab/dunion/Presentation/js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
 
